@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple Jakarta 10 MVC project using Jakarta Faces 4.0, Primefaces 12, Jakarta Persistence 3.1, and Hibernate.
+A simple Jakarta 10 MVC project using Jakarta Faces 4.0, Primefaces 12 and Jakarta Persistence 3.1.
 
 ---
 
@@ -92,9 +92,7 @@ Follow the steps below to install and set up the required components:
    - **serverName**: localhost
    - **user**: jakarta
    - **portNumber**: 3306
-   - **UseSSL**:
-
- false
+   - **UseSSL**: false
    - **allowPublicKeyRetrieval**: true
 
 12. Click **Finish** to create the JDBC connection pool.

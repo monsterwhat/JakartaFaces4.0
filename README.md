@@ -92,9 +92,7 @@ Follow the steps below to install and set up the required components:
    - **serverName**: localhost
    - **user**: jakarta
    - **portNumber**: 3306
-   - **UseSSL**:
-
- false
+   - **UseSSL**: false
    - **allowPublicKeyRetrieval**: true
 
 12. Click **Finish** to create the JDBC connection pool.

@@ -29,7 +29,7 @@ public class Service {
         try {
             System.out.println("Created EM");
 
-            String sqlQuery = "SELECT COUNT(*) FROM person WHERE username = ?1 AND password = ?2";
+            String sqlQuery = "SELECT COUNT(*) FROM users WHERE username = ?1 AND password = ?2";
             Query query = em.createNativeQuery(sqlQuery);
             query.setParameter(1, username);
             query.setParameter(2, password);

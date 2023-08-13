@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+<h:head>
     <title>Login Page</title>
-</head>
-<body>
-    <h:form>
-        <h2>Login</h2>
-        
-        <h:messages />
+</h:head>
+    
+<h:body>
+    <h:form rendered="#{not SessionController.isValid()}">
+        <p:panel header="Login">
+            <p:growl id="growl" showDetail="true" />
+            <h:panelGrid columns="2">
 
-        <p>
-            <label for="username">Username:</label>
-            <h:inputText id="username" value="#{Controller.username}" required="true" />
-        </p>
-        
-        <p>
-            <label for="password">Password:</label>
-            <h:inputSecret id="password" value="#{Controller.password}" required="true" />
-        </p>
-        
-        <p>
-            <h:commandButton value="Login" action="#{Controller.loginDB}" />
-        </p>
+                <h:outputLabel for="username" value="Username:" />
+                <p:inputText id="username" value="#{SessionController.username}" />
+
+                <h:outputLabel for="password" value="Password:" />
+                <p:password id="password" value="#{SessionController.password}" />
+
+                <p:commandButton value="Login" action="#{SessionController.executeLogin}" ajax="false" />
+            </h:panelGrid>
+        </p:panel>
     </h:form>
-</body>
+    <h:form rendered="#{SessionController.isValid()}">
+        <p:panel>
+            <h:panelGrid columns="1">
+                <h:outputLabel for="message" value="Oops!" />
+                <h:outputLabel for="message" value="You are already logged in Silly goose!" />
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+        
+</h:body>
+    
 </html>

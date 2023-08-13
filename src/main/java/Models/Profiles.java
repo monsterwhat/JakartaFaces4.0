@@ -14,8 +14,8 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "Users")
-public class Model implements Serializable{
+@Table(name = "Profiles")
+public class Profiles implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,13 +25,18 @@ public class Model implements Serializable{
     
     @Column
     private String password;
+    
+    @Column
+    private String groupName;
 
-    public Model() {
+    public Profiles() {
     }
-        
-    public Model(String username, String password) {
+
+    public Profiles(Long id, String username, String password, String groupName) {
+        this.id = id;
         this.username = username;
         this.password = password;
+        this.groupName = groupName;
     }
 
     public Long getId() {
@@ -56,6 +61,14 @@ public class Model implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
     
     

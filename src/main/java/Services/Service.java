@@ -88,5 +88,16 @@ public class Service extends GService<Profiles>{
         }
     }
     
+    @Override
+    public void create(Profiles entity) {
+        try {
+            var unHashedPassword = entity.getPassword();
+            var HashedPassword = passwordHasher.generate(unHashedPassword.toCharArray());
+            entity.setPassword(HashedPassword);
+            em.persist(entity);
+        } catch (Exception e) {
+        }
+    }
+    
     
 }

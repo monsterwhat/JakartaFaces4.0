@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
@@ -14,7 +15,8 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "Profiles")
+@Table(name = "Profiles",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class Profiles implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

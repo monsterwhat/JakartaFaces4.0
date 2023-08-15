@@ -54,7 +54,7 @@ public abstract class GService<T> implements Serializable{
                 System.out.println("Entity not found");
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.toString());
+            System.out.println("Error deleting "+ getEntityClass().getSimpleName() +" : " + e.toString());
         }
     }
 
@@ -63,7 +63,7 @@ public abstract class GService<T> implements Serializable{
             TypedQuery<Long> query = em.createQuery("SELECT COUNT(e) FROM " + getEntityClass().getSimpleName() + " e", Long.class);
             return query.getSingleResult();
         } catch (Exception e) {
-            System.out.println("Error: " + e.getLocalizedMessage());
+            System.out.println("Error counting "+ getEntityClass().getSimpleName() +" : " + e.getLocalizedMessage());
             return null;
         }
     }

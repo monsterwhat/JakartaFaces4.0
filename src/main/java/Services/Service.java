@@ -99,5 +99,22 @@ public class Service extends GService<Profiles>{
         }
     }
     
+    @Override
+    public void delete(Profiles entity) {
+        try {
+            if (!em.contains(entity)) {
+                entity = em.find(getEntityClass(), entity.getId());
+            }
+
+            if (entity != null) {
+                em.remove(entity);
+            } else {
+                System.out.println("Entity not found");
+            }
+        } catch (Exception e) {
+            System.out.println("Error deleting "+ getEntityClass().getSimpleName() +" : " + e.toString());
+        }
+    }
+    
     
 }

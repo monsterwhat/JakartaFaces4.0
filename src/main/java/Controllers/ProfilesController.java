@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 /**
  *
  * @author Al
@@ -23,6 +24,7 @@ public class ProfilesController implements Serializable{
     private Profiles selectedProfile;
     private Profiles newProfile;
     private String selectedOption = "view";
+    private String generatorOption;
     
     public ProfilesController() {
     }
@@ -87,8 +89,14 @@ public class ProfilesController implements Serializable{
     
     public void generateAndCreateRandomUsers() {
         FakeUserGenerator userGenerator = new FakeUserGenerator();
+        // Use the selectedGenerator value to determine the generator strategy
+        Optional<String> generatorInput = Optional.ofNullable(generatorOption);
+        if (generatorInput.isPresent()) {
+        userGenerator.setUsernameGenerator(generatorInput.get());
+        }
+        
         for (int i = 0; i < 10; i++) {
-            Profiles newUser = userGenerator.generateFakeUserProfile();
+            Profiles newUser = userGenerator.generateFakeUserProfile("user");
             profileService.create(newUser);
         }
         clearSelectedProfile();
@@ -96,8 +104,14 @@ public class ProfilesController implements Serializable{
     
     public void generateAndCreateRandomAdmins() {
         FakeUserGenerator userGenerator = new FakeUserGenerator();
+        
+        Optional<String> generatorInput = Optional.ofNullable(generatorOption);
+        if (generatorInput.isPresent()) {
+        userGenerator.setUsernameGenerator(generatorInput.get());
+        }
+        
         for (int i = 0; i < 10; i++) {
-            Profiles newUser = userGenerator.generateFakeAdminProfile();
+            Profiles newUser = userGenerator.generateFakeUserProfile("admin");
             profileService.create(newUser);
         }
         clearSelectedProfile();
@@ -134,6 +148,15 @@ public class ProfilesController implements Serializable{
     public void setSelectedOption(String selectedOption) {
         this.selectedOption = selectedOption;
     }
+
+    public String getGeneratorOption() {
+        return generatorOption;
+    }
+
+    public void setGeneratorOption(String generatorOption) {
+        this.generatorOption = generatorOption;
+    }
+    
     
     
 }

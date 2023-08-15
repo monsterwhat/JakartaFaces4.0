@@ -9,40 +9,43 @@ import Models.Profiles;
 import com.github.javafaker.Faker;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
 
 public class FakeUserGenerator {
     private final Faker faker;
-    private final Set<String> generatedUsernames;
+    private static Set<String> generatedUsernames = new HashSet<>();
+    private Supplier<String> usernameGenerator;
 
     public FakeUserGenerator() {
         faker = new Faker();
-        generatedUsernames = new HashSet<>();
+        setUsernameGenerator("dragonBall");
+    }
+    
+    public void setUsernameGenerator(String input) {
+        switch (input) {
+            case "dragonBall" -> usernameGenerator = () -> faker.dragonBall().character();
+            case "harryPotter" -> usernameGenerator = () -> faker.harryPotter().character();
+            case "rickandMorty" -> usernameGenerator = () -> faker.rickAndMorty().character();
+
+            default -> usernameGenerator = () -> faker.hobbit().character();
+        }
     }
 
     private String generateUniqueUsername() {
         String username;
         do {
-            username = faker.dragonBall().character();
+            username = usernameGenerator.get();
         } while (generatedUsernames.contains(username));
-        
+
         generatedUsernames.add(username);
         return username;
     }
-
-    public Profiles generateFakeUserProfile() {
-        Profiles profile = new Profiles();
-        profile.setUsername(generateUniqueUsername());
-        profile.setPassword(faker.internet().password());
-        profile.setGroupName("user");
-        return profile;
-    }
     
-    public Profiles generateFakeAdminProfile() {
+    public Profiles generateFakeUserProfile(String groupName) {
         Profiles profile = new Profiles();
         profile.setUsername(generateUniqueUsername());
         profile.setPassword(faker.internet().password());
-        profile.setGroupName("admin");
+        profile.setGroupName(groupName);
         return profile;
     }
 }
-

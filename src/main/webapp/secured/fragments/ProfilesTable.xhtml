@@ -17,6 +17,20 @@
         <div class="column is-one-quarter">
             <!-- Left Tile -->
             <div class="box">
+                <h:form>
+                    <div class="columns">
+                        <div class="column">
+                            <p:outputLabel value="Select Username Generator:"/>
+                            <p:selectOneMenu value="#{ProfilesController.generatorOption}" style="width: 100%;">
+                                <f:selectItem itemLabel="Dragon Ball" itemValue="dragonBall"/>
+                                <f:selectItem itemLabel="Harry Potter" itemValue="harryPotter"/>
+                                <f:selectItem itemLabel="Rick and Morty" itemValue="rickandMorty"/>
+                                <!-- Add more options as needed -->
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                </h:form>
+                
                 <p:commandButton value="Fill Datatable" actionListener="#{ProfilesController.generateAndCreateRandomUsers()}" styleClass="button is-fullwidth is-success" update="dynamicContent"/>
                 <br/>
                 <p:commandButton value="Create User" actionListener="#{ProfilesController.selectCreate()}" update="dynamicContent" styleClass="button is-fullwidth is-info"/>
@@ -29,8 +43,13 @@
                     <div class="tile is-parent is-vertical">
                         <div class="tile is-child">
                             <h:form id="profilesTable">
-                                <p:dataTable value="#{ProfilesController.profilesList()}" var="profile">
+                                <p:dataTable value="#{ProfilesController.profilesList()}" var="profile" 
+                                             paginator="true" rows="8" paginatorPosition="bottom" 
+                                             selection="#{ProfilesController.selectedProfile}" rowKey="#{profile.id}">
                                     <!-- Define your columns here -->
+                                    <p:column headerText="profileId" visible="false">
+                                        <h:outputText value="#{profile.id}"/>
+                                    </p:column>
                                     <p:column headerText="Username">
                                         <h:outputText value="#{profile.username}" />
                                     </p:column>
@@ -42,12 +61,12 @@
                                     </p:column>
                                     <p:column headerText="Actions" width="13%">
                                         <div class="buttons has-addons">
-                                            <p:commandButton icon="pi pi-pencil" actionListener="#{ProfilesController.selectEdit()}"
-                                            styleClass="button edit-button rounded-button ui-button-success" process="@this" update="dynamicContent">
+                                            <p:commandButton styleClass="button edit-button rounded-button ui-button-success" icon="pi pi-pencil"
+                                            actionListener="#{ProfilesController.selectEdit()}" process="@this" update="dynamicContent">
                                                 <f:setPropertyActionListener value="#{profile}" target="#{ProfilesController.selectedProfile}" />
                                             </p:commandButton>
-                                            <p:commandButton class="button ui-button-warning rounded-button" icon="pi pi-trash"
-                                                             process="@this" actionListener="#{ProfilesController.deleteProfile()}" update="dynamicContent">
+                                            <p:commandButton styleClass="button ui-button-warning rounded-button" icon="pi pi-trash"
+                                            actionListener="#{ProfilesController.deleteProfile()}" process="@this" update="dynamicContent">
                                                 <f:setPropertyActionListener value="#{profile}" target="#{ProfilesController.selectedProfile}" />
                                             </p:commandButton>
                                         </div>

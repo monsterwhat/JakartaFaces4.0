@@ -1,7 +1,7 @@
 package Controllers;
 
 import Models.Profiles;
-import Services.Service;
+import Services.ProfilesService; 
 import Utils.FakeUserGenerator;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
@@ -10,15 +10,17 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import lombok.Data;
 /**
  *
  * @author Al
  */
 
+@Data
 @Named(value = "ProfilesController")
 @ViewScoped
 public class ProfilesController implements Serializable{
-    @Inject private Service profileService;
+    @Inject private ProfilesService profileService;
 
     private List<Profiles> profiles;
     private Profiles selectedProfile;
@@ -116,47 +118,5 @@ public class ProfilesController implements Serializable{
         }
         clearSelectedProfile();
     }
-
-    public List<Profiles> getProfiles() {
-        return profiles;
-    }
-
-    public void setProfiles(List<Profiles> profiles) {
-        this.profiles = profiles;
-    }
-
-    public Profiles getSelectedProfile() {
-        return selectedProfile;
-    }
-
-    public void setSelectedProfile(Profiles selectedProfile) {
-        this.selectedProfile = selectedProfile;
-    }
-
-    public Profiles getNewProfile() {
-        return newProfile;
-    }
-
-    public void setNewProfile(Profiles newProfile) {
-        this.newProfile = newProfile;
-    }
-
-    public String getSelectedOption() {
-        return selectedOption;
-    }
-
-    public void setSelectedOption(String selectedOption) {
-        this.selectedOption = selectedOption;
-    }
-
-    public String getGeneratorOption() {
-        return generatorOption;
-    }
-
-    public void setGeneratorOption(String generatorOption) {
-        this.generatorOption = generatorOption;
-    }
-    
-    
-    
+ 
 }

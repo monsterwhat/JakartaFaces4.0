@@ -26,7 +26,7 @@ Before getting started with the project, make sure you have the following prereq
 
 - Download Payara 6.2023.6 from [here](https://www.payara.fish/downloads/payara-platform-community-edition/).
 
-### 4. MySQL 8 (Including JConnector)
+### 4. MySQL 8
 
 - Download and install MySQL 8 from [here](https://dev.mysql.com/downloads/installer/).
 
@@ -43,10 +43,8 @@ Follow the steps below to install and set up the required components:
 ### 2.2 MySQL 8
 
 1. Install MySQL using the downloaded installer.
-
-2. Download Connector-J. It should download by default to 'Program Files (x86)\MySQL\Connector J 8.0'.
-
-3. Create the database and user to manage it. Execute the following SQL statements in your MySQL client:
+  
+2. Create the database and user to manage it. Execute the following SQL statements in your MySQL client:
 
    ```sql
    CREATE DATABASE jakarta;
@@ -55,7 +53,10 @@ Follow the steps below to install and set up the required components:
    FLUSH PRIVILEGES;
    ```
 
-### 2.3 Payara 6
+### 2.3 Payara 6 !!!! NO LONGER NECESSARY !!!!
+
+BEWARE AS OF 10/14/2025 THIS PROJECT INCLUDES MYSQL ON POM 
+AND DEFINES RESOURCES IN DATASOURCECONFIG.JAVA MEANING THAT ALL STEPS RELATED TO CONFIGURING PAYARA ARE NO LONGER NECESSARY.
 
 1. Unzip the downloaded Payara package.
 
@@ -122,7 +123,7 @@ Follow the steps below to install and set up the required components:
 
 4. In the **Servers** window, click on **Add Server**.
 
-5. Choose **Payara Server**, browse to the location where you unzipped the Payara server, and click **Next**.
+5. Choose **Payara Server**, browse to the location where you unzipped the Payara server, or download one directly via netbeans and click **Next**. 
 
 6. Leave the domain location unchanged and click **Finish** to add the Payara server.
 

@@ -4,9 +4,10 @@ import Models.Profiles;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
+import jakarta.inject.Named; 
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -15,11 +16,12 @@ import lombok.Data;
 
 @Data
 @Named
+@EqualsAndHashCode(callSuper = false)
 @Stateless
 public class ProfilesService extends GService<Profiles> {
     
     @Inject Pbkdf2PasswordHash passwordHasher; 
-    
+      
     @Override
     protected Class<Profiles> getEntityClass(){
         return Profiles.class;

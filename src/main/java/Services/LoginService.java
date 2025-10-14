@@ -12,6 +12,7 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
@@ -21,6 +22,7 @@ import lombok.Data;
 @Data
 @Named
 @Stateless
+@EqualsAndHashCode(callSuper = false)
 public class LoginService extends GService<Profiles>{
         
     @Inject Pbkdf2PasswordHash passwordHasher; 

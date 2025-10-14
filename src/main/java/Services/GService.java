@@ -15,7 +15,7 @@ import java.util.List;
 
 @Transactional
 public abstract class GService<T> implements Serializable{
-    @PersistenceContext EntityManager em;
+    public @PersistenceContext EntityManager em;
 
     protected abstract Class<T> getEntityClass();
 

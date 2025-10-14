@@ -12,7 +12,7 @@ import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition
  */
 
 @DatabaseIdentityStoreDefinition(
-        dataSourceLookup = "jdbc/MySQL",
+        dataSourceLookup = "java:app/jdbc/MySQL",
         callerQuery = "select password from Profiles where username = ?",
         groupsQuery = "select groupName from Profiles where username = ?"
 )
